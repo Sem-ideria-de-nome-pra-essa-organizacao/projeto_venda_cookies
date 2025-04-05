@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('flavor');
             $table->string('size');
             $table->string('shape');
+            $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('baker_id');
+            $table->string('description')->nullable();
             $table->foreign('baker_id')->references('id')->on('bakers')->onDelete('cascade');
         });
     }
