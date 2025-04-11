@@ -16,15 +16,16 @@ class BakerFactory extends Factory
      * @return array<string, mixed>
      */
     protected $model =Baker::class;
-
     public function definition(): array
     {
+
+        $age = $this->faker->numberBetween(18, 65);
         return [
             'name' => $this->faker->unique()->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'age' => $this->faker->numberBetween(18, 65),
+            'age' => $age,
             'role' => $this->faker->randomElement(['head baker', 'assistant baker']),
-            'experience' => $this->faker->numberBetween(1, 20) . ' years',
+            'experience' => ($this->faker->numberBetween(1, 20) + $age) . ' years',
         ];
     }
 }
