@@ -22,7 +22,7 @@ class BiscuitFactory extends Factory
     public function definition(): array
     {
         return [
-        'name' => $this->faker->word(),
+        'name' => $this->faker->unique()->word(),
         'flavor' => $this->faker->randomElement(['chocolate', 'vanilla', 'strawberry', 'lemon']),
         'shape' => $this->faker->randomElement(['round', 'square', 'star']),
         'size' => $this->faker->randomElement(['small', 'medium', 'large']),

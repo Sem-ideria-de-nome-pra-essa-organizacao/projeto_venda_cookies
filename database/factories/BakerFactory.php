@@ -20,7 +20,7 @@ class BakerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->unique()->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'age' => $this->faker->numberBetween(18, 65),
             'role' => $this->faker->randomElement(['head baker', 'assistant baker']),

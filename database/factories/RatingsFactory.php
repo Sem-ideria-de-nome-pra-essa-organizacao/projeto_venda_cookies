@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Biscuit;
+use App\Models\Ratings;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,6 +17,8 @@ class RatingsFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model =Ratings::class;
+
     public function definition(): array
     {
         return [
