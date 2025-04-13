@@ -19,4 +19,9 @@ class Biscuit extends Model
         "price",
         "description",
     ];
+    public function baker()
+    {
+        return $this->belongsTo(Baker::class);
+    }
+
 }
