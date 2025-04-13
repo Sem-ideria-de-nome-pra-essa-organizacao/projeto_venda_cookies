@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('bakers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('age');
             $table->string('role');
             $table->string('experience');
+            $table->timestamps();
 
         });
     }

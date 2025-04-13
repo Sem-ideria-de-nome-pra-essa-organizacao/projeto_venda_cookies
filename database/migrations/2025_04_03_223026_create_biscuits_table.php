@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('biscuits', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name')->unique();
             $table->string('flavor');
             $table->string('size');
@@ -22,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('baker_id');
             $table->string('description')->nullable();
             $table->foreign('baker_id')->references('id')->on('bakers')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
