@@ -2,7 +2,7 @@
 @section('titulo', 'BoinaLachas')
 @section('conteudo')
 <div class="container mt-4">
-    <h3 class="mb-4">Listagem de Biscoito</h3>
+    <h3 class="mb-4">Listagem de Notas</h3>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ url('ratings/create') }}" class="btn btn-success">Criar</a>
         <form action="{{route('rating.search')}}" method="POST" class="d-flex align-items-center">

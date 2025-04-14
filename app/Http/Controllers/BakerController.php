@@ -29,6 +29,13 @@ class BakerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'age' => 'required|integer|min:0',
+            'role' => 'required|string|max:255',
+            'experience' => 'required|integer|min:0',
+        ]);
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -71,6 +78,14 @@ class BakerController extends Controller
         if (!$baker) {
             return redirect("bakers")->with('error', 'Baker not found');
         }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'age' => 'required|integer|min:0',
+            'role' => 'required|string|max:255',
+            'experience' => 'required|integer|min:0',
+        ]);
+        
         $data = [
             'name' => $request->name,
             'email' => $request->email,

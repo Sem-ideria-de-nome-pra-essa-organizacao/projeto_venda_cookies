@@ -29,6 +29,15 @@ class BiscuitController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'flavor' => 'required|string|max:255',
+            'baker_id' => 'required|integer|exists:bakers,id',
+            'shape' => 'required|string|max:255',
+            'size' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:1000',
+        ]);
         $data = [
             'name' => $request->name,
             'flavor' => $request->flavor,
@@ -73,6 +82,15 @@ class BiscuitController extends Controller
         if (!$biscuit) {
             return redirect("biscuits")->with('error', 'biscuit not found');
         }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'flavor' => 'required|string|max:255',
+            'baker_id' => 'required|integer|exists:bakers,id',
+            'shape' => 'required|string|max:255',
+            'size' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:1000',
+        ]);
         $data = [
             'name' => $request->name,
             'flavor' => $request->flavor,
