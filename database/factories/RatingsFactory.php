@@ -22,7 +22,7 @@ class RatingsFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'name' => $this->faker->name(),
             'biscuit_id' => Biscuit::factory(),
             'rating' => $this->faker->numberBetween(1, 5),
             'comment' => $this->faker->text(200),

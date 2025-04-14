@@ -12,8 +12,14 @@ class Ratings extends Model
 
     protected $fillable = [
         "biscuit_id",
-        "user_id",
+        "name",
         "rating",
         "comment",
     ];
+
+    public function biscuit()
+    {
+        return $this->belongsTo(Biscuit::class);
+    }
+
 }
