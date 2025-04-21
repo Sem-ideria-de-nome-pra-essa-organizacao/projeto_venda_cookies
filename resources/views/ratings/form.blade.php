@@ -26,7 +26,7 @@
 
                 <div class="row g-3 mt-3">
                     <div class="col-md-6">
-                        <label for="biscuit_id" class="form-label">Confeiteiro:</label>
+                        <label for="biscuit_id" class="form-label">Biscoito:</label>
                         <select id="biscuit_id" name="biscuit_id" class="form-control" required>
                             <option value="" disabled {{ old('biscuit_id', $rating->biscuit_id ?? '') == '' ? 'selected' : '' }}>Selecione um Biscoito</option>
                             @foreach($biscuits as $biscuit)
