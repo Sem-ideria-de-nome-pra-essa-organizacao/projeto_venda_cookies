@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', action: function () {
     return view('index');
-});
+})->name('home');
 //bakers
 Route::get( '/bakers', [BakerController::class,'index']) ->name('baker.index');
 Route::get( '/bakers/create', [BakerController::class,'create']) ->name('baker.create');
