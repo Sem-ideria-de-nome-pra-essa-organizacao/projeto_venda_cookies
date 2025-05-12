@@ -6,7 +6,7 @@
         <h3 class="mb-0">{{ isset($baker) ? 'Editar Confeiteiro' : 'Criar Novo Confeiteiro' }}</h3>
     </div>
     <div class="card-body">
-        <form action="{{ isset($baker) ? route('baker.update', $baker->id) : route('baker.store') }}" method="post">
+        <form action="{{ isset($baker) ? route('baker.update', $baker->id) : route('baker.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             @if (isset($baker))
                 @method('PUT')
@@ -35,6 +35,15 @@
                 <div class="col-md-4 mb-3">
                     <label for="experience" class="form-label">Experiência (anos):</label>
                     <input type="number" id="experience" name="experience" class="form-control" value="{{ old('experience', $baker->experience ?? '') }}" required>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="image" class="form-label">Foto de Perfil:</label>
+                    <input type="file" id="image" name="image" class="form-control">
+                    @if (isset($baker) && $baker->image)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $baker->image) }}" alt="Foto de Perfil" class="img-thumbnail" width="150">
+                        </div>
+                    @endif
                 </div>
             </div>
 

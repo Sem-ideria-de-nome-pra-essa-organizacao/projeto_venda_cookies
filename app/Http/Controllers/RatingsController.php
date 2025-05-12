@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biscuit;
+use App\Models\Client;
 use App\Models\Ratings;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class RatingsController extends Controller
      */
     public function create()
     {
-        return view('ratings.form', ['biscuits' => Biscuit::all()]);
+        return view('ratings.form', ['biscuits' => Biscuit::all(),'clients' => Client::all()]);
     }
 
     /**
@@ -31,14 +32,14 @@ class RatingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'client_id' => 'required|integer|exists:clients,id',
             'comment' => 'required|string|max:1000',
             'biscuit_id' => 'required|integer|exists:biscuits,id',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         $data = [
-            'name' => $request->name,
+            'client_id' => $request->client_id,
             'comment' => $request->comment,
             'biscuit_id' => $request->biscuit_id,
             'rating' => $request->rating,
@@ -60,12 +61,14 @@ class RatingsController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
+
     {
+
         $rating = Ratings::find($id);
         if (!$rating) {
             return redirect("ratings")->with('error', 'rating not found');
         }
-        return view('ratings.form', ['rating' => $rating, 'biscuits' => Biscuit::all()]);
+        return view('ratings.form', ['rating' => $rating, 'biscuits' => Biscuit::all(), 'clients' => Client::all()]);
     }
 
     /**
@@ -77,18 +80,21 @@ class RatingsController extends Controller
         if (!$rating) {
             return redirect("ratings")->with('error', 'rating not found');
         }
+
         $request->validate([
-            'name' => 'required|string|max:255',
+            'client_id' => 'required|integer|exists:clients,id',
             'comment' => 'required|string|max:1000',
             'biscuit_id' => 'required|integer|exists:biscuits,id',
             'rating' => 'required|integer|min:1|max:5',
         ]);
+
         $data = [
-            'name' => $request->name,
+            'client_id' => $request->client_id,
             'comment' => $request->comment,
             'biscuit_id' => $request->biscuit_id,
             'rating' => $request->rating,
         ];
+
 
         $rating->update($data);
 

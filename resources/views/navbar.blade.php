@@ -9,13 +9,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url('bakers') }}">Confeiteiros</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url('bakers') }}">Confeiteiros</a>  
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('biscuits') }}">Biscoitos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('ratings') }}">Notas</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('clients') }}">Clientes</a>
                 </li>
             </ul>
         </div>

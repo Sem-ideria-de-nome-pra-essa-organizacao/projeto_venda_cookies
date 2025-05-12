@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('biscuit_id');
-            $table->string('name');
+            $table->unsignedBigInteger('client_id');
             $table->integer('rating');
             $table->string('comment')->nullable();
             $table->foreign('biscuit_id')->references('id')->on('biscuits')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }

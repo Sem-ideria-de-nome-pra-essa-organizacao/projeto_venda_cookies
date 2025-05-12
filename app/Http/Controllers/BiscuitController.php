@@ -37,17 +37,22 @@ class BiscuitController extends Controller
             'size' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
-        ]);
-        $data = [
-            'name' => $request->name,
-            'flavor' => $request->flavor,
-            'baker_id' => $request->baker_id,
-            'shape' => $request->shape,
-            'size' => $request->size,
-            'price' => $request->price,
-            'description' => $request->description,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
 
-        ];
+        ]);
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $directory = "biscuits/";
+
+            $image->storeAs(
+                $directory,
+                $fileName,
+                'public'
+            );
+            $data['image'] = $directory . $fileName;
+        }
 
         Biscuit::create($data);
         return redirect("biscuits");
@@ -90,17 +95,22 @@ class BiscuitController extends Controller
             'size' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
-        ]);
-        $data = [
-            'name' => $request->name,
-            'flavor' => $request->flavor,
-            'baker_id' => $request->baker_id,
-            'shape' => $request->shape,
-            'size' => $request->size,
-            'price' => $request->price,
-            'description' => $request->description,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
 
-        ];
+        ]);
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $directory = "biscuits/";
+
+            $image->storeAs(
+                $directory,
+                $fileName,
+                'public'
+            );
+            $data['image'] = $directory . $fileName;
+        }
 
         $biscuit ->update($data);
 
@@ -115,6 +125,12 @@ class BiscuitController extends Controller
         $biscuit = Biscuit::find($id);
         if (!$biscuit) {
             return redirect("biscuits")->with('error', 'biscuit not found');
+        }
+        if ($biscuit->image) {
+            $imagePath = public_path('storage/' . $biscuit->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
         $biscuit->delete();
         return redirect("biscuits");

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BakerController;
 use App\Http\Controllers\BiscuitController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\RatingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,14 @@ Route::delete( 'ratings/{id}', [RatingsController::class,'destroy']) ->name('rat
 Route::get( 'ratings/{id}', [RatingsController::class,'edit']) ->name('rating.edit');
 Route::put( 'ratings/update/{id}', [RatingsController::class,'update']) ->name('rating.update');
 Route::post( 'ratings/', [RatingsController::class,'search']) ->name('rating.search');
+
+//clients
+Route::get( '/clients', [ClientController::class,'index']) ->name('client.index');
+Route::get( '/clients/create', [ClientController::class,'create']) ->name('client.create');
+Route::post( '/clients/store', [ClientController::class,'store']) ->name('client.store');
+Route::delete( 'clients/{id}', [ClientController::class,'destroy']) ->name('client.destroy');
+Route::get( 'clients/{id}', [ClientController::class,'edit']) ->name('client.edit');
+Route::put( 'clients/update/{id}', [ClientController::class,'update']) ->name('client.update');
+Route::post( 'clients/', [ClientController::class,'search']) ->name('client.search');
+
 

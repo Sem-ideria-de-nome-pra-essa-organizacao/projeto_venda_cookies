@@ -24,6 +24,7 @@
     <thead class="table-dark">
         <tr>
             <th>ID</th>
+            <th>Foto</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Idade</th>
@@ -36,6 +37,12 @@
         @foreach ($data as $item)
             <tr>
                 <td>{{ $item->id }}</td>
+                <td>
+                    @if ($item->image)
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="Imagem do Confeiteiro" width="400">
+                    @else
+                        Sem imagem
+                    @endif
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>{{ $item->age }}</td>

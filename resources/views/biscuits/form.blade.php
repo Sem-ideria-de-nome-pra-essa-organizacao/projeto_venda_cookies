@@ -6,7 +6,7 @@
         <h3 class="mb-0">{{ isset($biscuit) ? 'Editar Biscoito' : 'Criar Novo Biscoito' }}</h3>
     </div>
     <div class="card-body">
-        <form action="{{ isset($biscuit) ? route('biscuit.update', $biscuit->id) : route('biscuit.store') }}" method="post">
+        <form action="{{ isset($biscuit) ? route('biscuit.update', $biscuit->id) : route('biscuit.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             @if (isset($biscuit))
                 @method('PUT')
@@ -53,6 +53,15 @@
                 <div class="col-md-4 mb-3">
                     <label for="description" class="form-label">Descrição:</label>
                     <textarea id="description" name="description" class="form-control" rows="2" required>{{ old('description', $biscuit->description ?? '') }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="image" class="form-label">Imagem:</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                    @if (isset($biscuit) && $biscuit->image)
+                        <img src="{{ asset('storage/' . $biscuit->image) }}" alt="Imagem do Biscoito" class="img-thumbnail mt-2" style="max-height: 150px;">
+                    @endif
                 </div>
             </div>
 

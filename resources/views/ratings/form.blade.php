@@ -15,8 +15,16 @@
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="name" class="form-label">Nome:</label>
-                        <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $rating->name ?? '') }}" required>
+                        <label for="client_id" class="form-label">Cliente:</label>
+
+                        <select id="client_id" name="client_id" class="form-control" required>
+                            <option value="" disabled {{ old('client_id', $rating->client_id ?? '') == '' ? 'selected' : '' }}>Selecione um Cliente</option>
+                            @foreach($clients as $client)
+                                <option value="{{ $client->id }}" {{ old('client_id', $rating->client_id ?? '') == $client->id ? 'selected' : '' }}>
+                                    {{ $client->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="rating" class="form-label">Nota:</label>

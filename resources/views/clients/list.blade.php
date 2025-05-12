@@ -2,10 +2,10 @@
 @section('titulo', 'BoinaLachas')
 @section('conteudo')
 <div class="container mt-4">
-    <h3 class="mb-4">Listagem de Notas</h3>
+    <h3 class="mb-4">Listagem de Clientes</h3>
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ url('ratings/create') }}" class="btn btn-success">Criar</a>
-        <form action="{{route('rating.search')}}" method="POST" class="d-flex align-items-center">
+        <a href="{{ url('clients/create') }}" class="btn btn-success">Criar</a>
+        <form action="{{route('client.search')}}" method="POST" class="d-flex align-items-center">
             @csrf
             <label for="type" class="me-2">Tipo</label>
             <select name="type" id="type" class="form-select me-2" style="width: auto;">
@@ -22,26 +22,25 @@
     <thead class="table-dark">
         <tr>
             <th>ID</th>
-            <th>Usuário</th>
-            <th>Produto</th>
-            <th>Avaliação</th>
-            <th>Comentário</th>
-            <th>Data</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Criado em</th>
             <th>Ações</th>
+
         </tr>
     </thead>
     <tbody>
         @foreach ($data as $item)
             <tr>
                 <td>{{ $item->id }}</td>
-                <td>{{ $item->client->name }}</td>
-                <td>{{ $item->biscuit->name }}</td>
-                <td>{{ $item->rating }}</td>
-                <td>{{ $item->comment }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->cpf }}</td>
+                <td>{{ $item->email }}</td>
                 <td>{{ $item->created_at->format('d/m/Y') }}</td>
                 <td>
-                    <a href="{{ route('rating.edit', $item->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('rating.destroy', $item->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('client.edit', $item->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('client.destroy', $item->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"

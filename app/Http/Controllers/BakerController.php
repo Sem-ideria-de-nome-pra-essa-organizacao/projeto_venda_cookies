@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Baker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BakerController extends Controller
 {
@@ -31,19 +32,25 @@ class BakerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|unique:bakers,email|max:255',
             'age' => 'required|integer|min:0',
             'role' => 'required|string|max:255',
             'experience' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'age' => $request->age,
-            'role' => $request->role,
-            'experience' => $request->experience,
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $directory = "baker/";
 
-        ];
+            $image->storeAs(
+                $directory,
+                $fileName,
+                'public'
+            );
+            $data['image'] = $directory . $fileName;
+        }
 
         Baker::create($data);
         return redirect("bakers");
@@ -80,21 +87,26 @@ class BakerController extends Controller
         }
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|unique:bakers,email|max:255',
             'age' => 'required|integer|min:0',
             'role' => 'required|string|max:255',
             'experience' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'age' => $request->age,
-            'role' => $request->role,
-            'experience' => $request->experience,
 
-        ];
+         $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $directory = "baker/";
 
+            $image->storeAs(
+                $directory,
+                $fileName,
+                'public'
+            );
+            $data['image'] = $directory . $fileName;
+        }
         $baker ->update($data);
 
         return redirect("bakers");
@@ -108,6 +120,12 @@ class BakerController extends Controller
         $baker = Baker::find($id);
         if (!$baker) {
             return redirect("bakers")->with('error', 'Baker not found');
+        }
+        if ($baker->image) {
+            $imagePath = public_path("storage/{$baker->image}");
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
         $baker->delete();
         return redirect("bakers");

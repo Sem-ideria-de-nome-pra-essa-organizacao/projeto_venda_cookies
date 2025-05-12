@@ -18,6 +18,7 @@ class Biscuit extends Model
         "size",
         "price",
         "description",
+        "image",
     ];
     public function baker()
     {

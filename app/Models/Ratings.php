@@ -12,7 +12,7 @@ class Ratings extends Model
 
     protected $fillable = [
         "biscuit_id",
-        "name",
+        "client_id",
         "rating",
         "comment",
     ];
@@ -20,6 +20,10 @@ class Ratings extends Model
     public function biscuit()
     {
         return $this->belongsTo(Biscuit::class);
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
 }
