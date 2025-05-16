@@ -153,13 +153,13 @@ class BakerBiscuitController extends Controller
 
             $data = $baker->biscuits()->where($type, 'like', "%$value%")->get();
             if (empty($data)) {
-                return view("baker.biscuits.list", ['data' => $data,'baker' => $baker])->with('error', 'Nenhum resultado encontrado.');
+                return view("bakers.biscuits.list", ['data' => $data,'baker' => $baker])->with('error', 'Nenhum resultado encontrado.');
             }
         }else{
             $data = $baker->biscuits()->get();
         }
 
-        return view("baker.biscuits.list", ['data' => $data, 'baker' => $baker]);
+        return view("bakers.biscuits.list", ['data' => $data, 'baker' => $baker]);
 
     }
 }
