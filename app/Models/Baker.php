@@ -17,4 +17,8 @@ class Baker extends Model
         "experience",
         "image"
     ];
+    public function biscuits()
+    {
+        return $this->hasMany(Biscuit::class);
+    }
 }

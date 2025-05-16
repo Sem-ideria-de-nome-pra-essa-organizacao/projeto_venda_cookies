@@ -2,16 +2,16 @@
 @section('titulo', 'BoinaLachas')
 @section('conteudo')
 <div class="container mt-4">
-    <h3 class="mb-4">Listagem de Confeiteiros</h3>
+    <h3 class="mb-4">Listagem de Biscoitos do confeiteiro {{ $baker->name }}</h3>
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ url('bakers/create') }}" class="btn btn-success">Criar</a>
-        <form action="{{route('baker.search')}}" method="POST" class="d-flex align-items-center">
+        <a href="{{ route('bakerbiscuit.create',$baker) }}" class="btn btn-success">Criar</a>
+        <form action="{{route('bakerbiscuit.search',$baker)}}" method="POST" class="d-flex align-items-center">
             @csrf
             <label for="type" class="me-2">Tipo</label>
             <select name="type" id="type" class="form-select me-2" style="width: auto;">
                 <option value="name">Nome</option>
-                <option value="age">Idade</option>
-                <option value="role">Cargo</option>
+                <option value="flavor">Sabor</option>
+                <option value="shape">formato</option>
             </select>
             <input type="text" name="value" placeholder="Valor" class="form-control me-2" style="width: auto;">
             <button type="submit" class="btn btn-secondary">Buscar</button>
@@ -24,13 +24,12 @@
     <thead class="table-dark">
         <tr>
             <th>ID</th>
-            <th>Foto</th>
+            <th>Imagem</th>
             <th>Nome</th>
-            <th>Email</th>
-            <th>Idade</th>
-            <th>Cargo</th>
-            <th>Profissão</th>
-            <th>Biscoitos</th>
+            <th>Sabor</th>
+            <th>Formmato</th>
+            <th>Tamanho</th>
+            <th>Preço</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -40,19 +39,18 @@
                 <td>{{ $item->id }}</td>
                 <td>
                     @if ($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="Imagem do Confeiteiro" width="400">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="Imagem do Biscoito" width="400">
                     @else
                         Sem imagem
                     @endif
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->email }}</td>
-                <td>{{ $item->age }}</td>
-                <td>{{ $item->role }}</td>
-                <td>{{ $item->experience }}</td>
-                <td><a href="{{route('bakerbiscuit.index',$item)}}">Ver Biscoitos</a></td>
+                <td>{{ $item->flavor }}</td>
+                <td>{{ $item->shape }}</td>
+                <td>{{ $item->size }}</td>
+                <td>{{ $item->price }}</td>
                 <td>
-                    <a href="{{ route('baker.edit', $item->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('baker.destroy', $item->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('bakerbiscuit.edit', [$baker,$item->id]) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('bakerbiscuit.destroy', [$baker,$item->id]) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"

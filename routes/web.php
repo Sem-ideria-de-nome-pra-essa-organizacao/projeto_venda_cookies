@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BakerBiscuitController;
 use App\Http\Controllers\BakerController;
 use App\Http\Controllers\BiscuitController;
 use App\Http\Controllers\ClientController;
@@ -45,4 +46,10 @@ Route::get( 'clients/{id}', [ClientController::class,'edit']) ->name('client.edi
 Route::put( 'clients/update/{id}', [ClientController::class,'update']) ->name('client.update');
 Route::post( 'clients/', [ClientController::class,'search']) ->name('client.search');
 
-
+Route::get( 'bakers/biscuits/{baker}', [BakerBiscuitController::class,'index']) ->name('bakerbiscuit.index');
+Route::get( 'bakers/biscuits/{baker}/create', [BakerBiscuitController::class,'create']) ->name('bakerbiscuit.create');
+Route::post( 'bakers/biscuits/store', [BakerBiscuitController::class,'store']) ->name('bakerbiscuit.store');
+Route::delete( 'bakers/biscuits/{baker}/{id}', [BakerBiscuitController::class,'destroy']) ->name('bakerbiscuit.destroy');
+Route::get( 'bakers/biscuits/{baker}/{id}', [BakerBiscuitController::class,'edit']) ->name('bakerbiscuit.edit');
+Route::put( 'bakers/biscuits/update/{id}', [BakerBiscuitController::class,'update']) ->name('bakerbiscuit.update');
+Route::post( 'bakers/biscuits/{baker}/', [BakerBiscuitController::class,'search']) ->name('bakerbiscuit.search');
