@@ -18,6 +18,7 @@ Route::delete( 'bakers/{id}', [BakerController::class,'destroy']) ->name('baker.
 Route::get( 'bakers/{id}', [BakerController::class,'edit']) ->name('baker.edit');
 Route::put( 'bakers/update/{id}', [BakerController::class,'update']) ->name('baker.update');
 Route::post( 'bakers/', [BakerController::class,'search']) ->name('baker.search');
+Route::get( 'download/bakers/report', [BakerController::class,'report']) ->name('baker.report');
 
 //biscuits
 Route::get( '/biscuits', [BiscuitController::class,'index']) ->name('biscuit.index');
@@ -27,6 +28,7 @@ Route::delete( 'biscuits/{id}', [BiscuitController::class,'destroy']) ->name('bi
 Route::get( 'biscuits/{id}', [BiscuitController::class,'edit']) ->name('biscuit.edit');
 Route::put( 'biscuits/update/{id}', [BiscuitController::class,'update']) ->name('biscuit.update');
 Route::post( 'biscuits/', [BiscuitController::class,'search']) ->name('biscuit.search');
+Route::get( 'download/biscuits/report', [BiscuitController::class,'report']) ->name('biscuit.report');
 
 //ratings
 Route::get( '/ratings', [RatingsController::class,'index']) ->name('rating.index');

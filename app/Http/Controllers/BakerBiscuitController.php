@@ -162,4 +162,5 @@ class BakerBiscuitController extends Controller
         return view("bakers.biscuits.list", ['data' => $data, 'baker' => $baker]);
 
     }
+    
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Baker;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -147,4 +148,17 @@ class BakerController extends Controller
         return view("bakers.list", ['data' => $data]);
 
     }
+
+     public function report()
+    {
+        $bakers = Baker::orderBy('name')->get();
+
+        $data = [
+            'bakers' => $bakers,
+        ];
+
+        $pdf = Pdf::loadView('bakers.report', $data);
+        return $pdf->download('relatorio_listagem_baker.pdf');
+    }
+
 }

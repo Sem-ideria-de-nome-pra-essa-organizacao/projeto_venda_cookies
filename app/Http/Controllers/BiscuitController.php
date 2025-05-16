@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Baker;
 use Illuminate\Http\Request;
 use App\Models\Biscuit;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class BiscuitController extends Controller
 {
      /**
@@ -151,5 +153,16 @@ class BiscuitController extends Controller
 
         return view("biscuits.list", ['data' => $data]);
 
+    }
+    public function report()
+    {
+        $biscuits = Biscuit::orderBy('name')->get();
+
+        $data = [
+            'biscuits' => $biscuits,
+        ];
+
+        $pdf = Pdf::loadView('biscuits.report', $data);
+        return $pdf->download('relatorio_listagem_biscuits.pdf');
     }
 }

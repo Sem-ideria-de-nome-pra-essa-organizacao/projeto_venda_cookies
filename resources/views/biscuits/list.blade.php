@@ -18,7 +18,11 @@
         </form>
     </div>
 </div>
-
+<div class="mb-3">
+    <a href="{{ route('biscuit.report') }}" class="btn btn-primary">
+        Baixar PDF da Lista
+    </a>
+</div>
 
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
